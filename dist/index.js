@@ -1,8 +1,5 @@
-(function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('lodash')) :
-  typeof define === 'function' && define.amd ? define(['lodash'], factory) :
-  (global = global || self, global['joey-storage'] = factory(global._));
-}(this, function (_) { 'use strict';
+var JStorage = (function (_) {
+  'use strict';
 
   _ = _ && _.hasOwnProperty('default') ? _['default'] : _;
 
@@ -28,11 +25,7 @@
     return Constructor;
   }
 
-  var aa = function aa() {
-    console.log('aaa');
-  };
-
-  aa();
+  var objPrefix = 'joey-obj-';
 
   var Storage =
   /*#__PURE__*/
@@ -57,28 +50,34 @@
       key: "lsSetValue",
       value: function lsSetValue(key, value) {
         if (_.isObject(value)) {
-          lsStorage.setItem(prefix + key, JSON.stringify(value));
+          this.lsStorage.setItem(key, "".concat(objPrefix).concat(JSON.stringify(value)));
         } else if (_.isNil(value)) {
-          lsStorage.setItem(prefix + key, "");
+          this.lsStorage.setItem(key, '');
         } else {
-          lsStorage.setItem(prefix + key, value);
+          this.lsStorage.setItem(key, value);
         }
       }
     }, {
       key: "lsGetValue",
       value: function lsGetValue(key) {
-        var value = lsStorage.getItem(prefix + key);
+        var value = this.lsStorage.getItem(key);
 
-        try {
-          return JSON.parse(value);
-        } catch (_unused) {
+        if (!_.isNil(value) && _.startsWith(value, objPrefix)) {
+          var objValue = _.replace(value, objPrefix, '');
+
+          try {
+            return JSON.parse(objValue);
+          } catch (_unused) {
+            return value;
+          }
+        } else {
           return value;
         }
       }
     }, {
       key: "lsRemove",
       value: function lsRemove(key) {
-        lsStorage.removeItem(prefix + key);
+        this.lsStorage.removeItem(key);
       }
       /**
        * sessionStorage
@@ -87,29 +86,35 @@
     }, {
       key: "ssSetValue",
       value: function ssSetValue(key, value) {
-        if (value instanceof Object) {
-          ssStorage.setItem(prefix + key, JSON.stringify(value));
+        if (_.isObject(value)) {
+          this.ssStorage.setItem(key, "".concat(objPrefix).concat(JSON.stringify(value)));
         } else if (_.isNil(value)) {
-          ssStorage.setItem(prefix + key, "");
+          this.ssStorage.setItem(key, '');
         } else {
-          ssStorage.setItem(prefix + key, value);
+          this.ssStorage.setItem(key, value);
         }
       }
     }, {
       key: "ssGetValue",
       value: function ssGetValue(key) {
-        var value = ssStorage.getItem(prefix + key);
+        var value = this.ssStorage.getItem(key);
 
-        try {
-          return JSON.parse(value);
-        } catch (_unused2) {
+        if (!_.isNil(value) && _.startsWith(value, objPrefix)) {
+          var objValue = _.replace(value, objPrefix, '');
+
+          try {
+            return JSON.parse(objValue);
+          } catch (_unused2) {
+            return value;
+          }
+        } else {
           return value;
         }
       }
     }, {
       key: "ssRemoveByKey",
       value: function ssRemoveByKey(key) {
-        ssStorage.removeItem(prefix + key);
+        this.ssStorage.removeItem(key);
       }
       /**
        * common
@@ -118,8 +123,8 @@
     }, {
       key: "clearAll",
       value: function clearAll() {
-        ssStorage.clear();
-        ssStorage.clear();
+        this.lsStorage.clear();
+        this.ssStorage.clear();
       }
     }]);
 
@@ -130,4 +135,4 @@
 
   return main;
 
-}));
+}(_));
