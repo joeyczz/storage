@@ -1,5 +1,8 @@
-var JStorage = (function (_) {
-  'use strict';
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('lodash')) :
+  typeof define === 'function' && define.amd ? define(['lodash'], factory) :
+  (global = global || self, global.JStorage = factory(global._));
+}(this, function (_) { 'use strict';
 
   _ = _ && _.hasOwnProperty('default') ? _['default'] : _;
 
@@ -135,4 +138,4 @@ var JStorage = (function (_) {
 
   return main;
 
-}(_));
+}));

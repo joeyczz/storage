@@ -8,15 +8,13 @@ export default {
   output: {
     file: 'dist/index.js',
     name: 'JStorage',
-    format: 'iife',
+    format: 'umd',
     globals: {
       lodash: '_'
     }
   },
   plugins: [
     resolve({
-      module: true,
-      jsnext: true,
       browser: true
     }),
     commonjs(),
