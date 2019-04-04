@@ -9,6 +9,8 @@ const objValue = { a: 1, b: 2 };
 
 const arrValue = [1, 2, 3];
 
+const strValue1 = 'joey-obj-sss';
+
 /**
  * localStorage
  */
@@ -25,6 +27,12 @@ test('lsStorage string', () => {
   storage.lsSetValue(key, strValue);
   const value = storage.lsGetValue(key);
   expect(value).toBe(strValue);
+});
+
+test('lsStorage string not obj', () => {
+  storage.lsSetValue(key, strValue1);
+  const value = storage.lsGetValue(key);
+  expect(value).toBe(strValue1);
 });
 
 test('lsStorage obj', () => {
@@ -46,7 +54,7 @@ test('lsStorage remove', () => {
 
   storage.lsRemove(key);
   const removeVal = storage.lsGetValue(key);
-  expect(removeVal).toEqual(null);
+  expect(removeVal).toBeNull();
 });
 
 /**
@@ -65,6 +73,12 @@ test('ssStorage string', () => {
   storage.ssSetValue(key, strValue);
   const value = storage.ssGetValue(key);
   expect(value).toBe(strValue);
+});
+
+test('ssStorage string not obj', () => {
+  storage.ssSetValue(key, strValue1);
+  const value = storage.ssGetValue(key);
+  expect(value).toBe(strValue1);
 });
 
 test('ssStorage obj', () => {
@@ -86,7 +100,7 @@ test('ssStorage remove', () => {
 
   storage.ssRemove(key);
   const removeVal = storage.ssGetValue(key);
-  expect(removeVal).toEqual(null);
+  expect(removeVal).toBeNull();
 });
 
 /**
@@ -100,6 +114,6 @@ test('storage clearAll', () => {
 
   const lsVal = storage.lsGetValue(key);
   const ssVal = storage.ssGetValue(key);
-  expect(lsVal).toEqual(null);
-  expect(ssVal).toEqual(null);
+  expect(lsVal).toBeNull();
+  expect(ssVal).toBeNull();
 });
