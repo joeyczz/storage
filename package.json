@@ -1,10 +1,10 @@
 {
   "name": "joey-storage",
-  "version": "1.0.0",
+  "version": "1.0.1-beta",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c"
   },
   "keywords": [
     "storage"
@@ -12,7 +12,11 @@
   "author": "Joey",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/polyfill": "^7.4.3",
+    "@babel/preset-env": "^7.4.3",
     "lodash": "^4.17.11",
-    "rollup": "^1.8.0"
+    "rollup": "^1.8.0",
+    "rollup-plugin-babel": "^4.3.2"
   }
 }

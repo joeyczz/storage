@@ -2,7 +2,10 @@
  * 缓存处理工具
  */
 import _ from "lodash";
-
+let aa = () => {
+  console.log('aaa');
+}
+aa();
 class Storage {
   // 构造函数
   constructor() {
