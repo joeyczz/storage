@@ -13,10 +13,6 @@ branches:
   - master
 # install 脚本
 install: yarn
-# 需要全局安装 eslint 
-before_script:
-  - npm i -g eslint
-  - npm i -g 
 # build 
 script:
   - yarn lint

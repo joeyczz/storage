@@ -1,5 +1,7 @@
 # storage
 
+[![Build Status](https://travis-ci.com/joeyczz/storage.svg?branch=master)](https://travis-ci.com/joeyczz/storage)
+
 ## 安装
 
 ```
