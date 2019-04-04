@@ -3,12 +3,14 @@
  * 缓存处理工具
  */
 import _ from 'lodash';
+import { version } from '../package.json';
 
 const objPrefix = 'joey-obj-';
 
 class Storage {
   // 构造函数
   constructor() {
+    this.version = version;
     if (!window.localStorage || !window.sessionStorage) {
       throw new Error('该浏览器不支持，请使用新版Chrome或者Firefox。');
     } else {
