@@ -10,17 +10,17 @@ export default {
     name: 'JStorage',
     format: 'umd',
     globals: {
-      lodash: '_'
-    }
+      lodash: '_',
+    },
   },
   plugins: [
     resolve({
-      browser: true
+      browser: true,
     }),
     commonjs(),
     babel({
-      exclude: 'node_module/**'
-    })
+      exclude: 'node_module/**',
+    }),
   ],
-  external: ['lodash']
+  external: ['lodash'],
 };

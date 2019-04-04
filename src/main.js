@@ -1,7 +1,8 @@
+/* global window */
 /**
  * 缓存处理工具
  */
-import _ from "lodash";
+import _ from 'lodash';
 
 const objPrefix = 'joey-obj-';
 
@@ -9,7 +10,7 @@ class Storage {
   // 构造函数
   constructor() {
     if (!window.localStorage || !window.sessionStorage) {
-      console.error("该浏览器不支持，请使用新版Chrome或者Firefox。");
+      throw new Error('该浏览器不支持，请使用新版Chrome或者Firefox。');
     } else {
       this.lsStorage = window.localStorage;
       this.ssStorage = window.sessionStorage;
@@ -35,7 +36,7 @@ class Storage {
       const objValue = _.replace(value, objPrefix, '');
       try {
         return JSON.parse(objValue);
-      } catch {
+      } catch (e) {
         return value;
       }
     } else {
@@ -66,7 +67,7 @@ class Storage {
       const objValue = _.replace(value, objPrefix, '');
       try {
         return JSON.parse(objValue);
-      } catch {
+      } catch (e) {
         return value;
       }
     } else {
@@ -74,7 +75,7 @@ class Storage {
     }
   }
 
-  ssRemoveByKey(key) {
+  ssRemove(key) {
     this.ssStorage.removeItem(key);
   }
 

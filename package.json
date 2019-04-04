@@ -4,7 +4,11 @@
   "description": "",
   "main": "dist/index.js",
   "scripts": {
-    "build": "rollup -c"
+    "lint": "eslint --ext .js src",
+    "lint-fix": "eslint --ext .js src --fix",
+    "build": "NODE_ENV=production rollup -c",
+    "test": "NODE_ENV=development jest",
+    "test-cov": "NODE_ENV=development jest --coverage"
   },
   "keywords": [
     "storage"
@@ -15,6 +19,10 @@
     "@babel/core": "^7.4.3",
     "@babel/polyfill": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "jest": "^24.7.1",
     "rollup": "^1.8.0",
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.3.3",
