@@ -2,10 +2,9 @@
  * 缓存处理工具
  */
 import _ from "lodash";
-let aa = () => {
-  console.log('aaa');
-}
-aa();
+
+const objPrefix = 'joey-obj-';
+
 class Storage {
   // 构造函数
   constructor() {
@@ -22,59 +21,69 @@ class Storage {
    */
   lsSetValue(key, value) {
     if (_.isObject(value)) {
-      lsStorage.setItem(prefix + key, JSON.stringify(value));
+      this.lsStorage.setItem(key, `${objPrefix}${JSON.stringify(value)}`);
     } else if (_.isNil(value)) {
-      lsStorage.setItem(prefix + key, "");
+      this.lsStorage.setItem(key, '');
     } else {
-      lsStorage.setItem(prefix + key, value);
+      this.lsStorage.setItem(key, value);
     }
   }
 
   lsGetValue(key) {
-    const value = lsStorage.getItem(prefix + key);
-    try {
-      return JSON.parse(value);
-    } catch {
+    const value = this.lsStorage.getItem(key);
+    if (!_.isNil(value) && _.startsWith(value, objPrefix)) {
+      const objValue = _.replace(value, objPrefix, '');
+      try {
+        return JSON.parse(objValue);
+      } catch {
+        return value;
+      }
+    } else {
       return value;
     }
   }
 
   lsRemove(key) {
-    lsStorage.removeItem(prefix + key);
+    this.lsStorage.removeItem(key);
   }
 
   /**
    * sessionStorage
    */
   ssSetValue(key, value) {
-    if (value instanceof Object) {
-      ssStorage.setItem(prefix + key, JSON.stringify(value));
+    if (_.isObject(value)) {
+      this.ssStorage.setItem(key, `${objPrefix}${JSON.stringify(value)}`);
     } else if (_.isNil(value)) {
-      ssStorage.setItem(prefix + key, "");
+      this.ssStorage.setItem(key, '');
     } else {
-      ssStorage.setItem(prefix + key, value);
+      this.ssStorage.setItem(key, value);
     }
   }
 
   ssGetValue(key) {
-    const value = ssStorage.getItem(prefix + key);
-    try {
-      return JSON.parse(value);
-    } catch {
+    const value = this.ssStorage.getItem(key);
+    if (!_.isNil(value) && _.startsWith(value, objPrefix)) {
+      const objValue = _.replace(value, objPrefix, '');
+      try {
+        return JSON.parse(objValue);
+      } catch {
+        return value;
+      }
+    } else {
       return value;
     }
   }
 
   ssRemoveByKey(key) {
-    ssStorage.removeItem(prefix + key);
+    this.ssStorage.removeItem(key);
   }
 
   /**
    * common
    */
   clearAll() {
-    ssStorage.clear();
-    ssStorage.clear();
+    this.lsStorage.clear();
+    this.ssStorage.clear();
   }
 }
 
