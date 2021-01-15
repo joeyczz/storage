@@ -1,6 +1,5 @@
 # storage
 
-[![Build Status](https://travis-ci.com/joeyczz/storage.svg?branch=master)](https://travis-ci.com/joeyczz/storage)
 [![codecov](https://codecov.io/gh/joeyczz/storage/branch/master/graph/badge.svg)](https://codecov.io/gh/joeyczz/storage)
 
 ## 安装

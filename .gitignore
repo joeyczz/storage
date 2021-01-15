@@ -1,9 +1,11 @@
 .DS_Store
 node_modules
-bower_components
 coverage
 
 # Log files
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+dist
+lib
