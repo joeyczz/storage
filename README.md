@@ -2,12 +2,18 @@
 
 [![codecov](https://codecov.io/gh/joeyczz/storage/branch/master/graph/badge.svg)](https://codecov.io/gh/joeyczz/storage)
 
+重写了storage
+
+```
+setValue('key', any);
+<!-- 数据将以 JSON.stringify({ value: any }) 存入 -->
+```
 ## 安装
 
 ```
-npm install joey-storage
+npm install @joey-c/storage
 or 
-yarn add joey-storage
+yarn add @joey-c/storage
 
 ```
 
@@ -15,39 +21,41 @@ yarn add joey-storage
 
 ```
 <!-- import -->
-import storage from 'joey-storage';
+import { clearAll, localJStorage, sessionJStorage } from '@joey-c/storage';
 
 <!-- localStorage 存 -->
-storage.lsSetValue('key', 'hhhh');
+localJStorage.setValue('key', 'hhhh');
 
 <!-- localStorage 取 -->
-const value = storage.lsGetValue('key');
+const value = localJStorage.getValue('key');
 console.log('storage', value);
 
 <!-- localStorage 删除key -->
-storage.lsRemove('key');
+localJStorage.remove('key');
+
+<!-- localStorage 清空 -->
+localJStorage.clearAll();
 
 <!-- sessionStorage 存 -->
-storage.ssSetValue('sskey', ['sshhhh']);
+sessionJStorage.setValue('sskey', ['sshhhh']);
 
 <!-- sessionStorage 取 -->
-const ssvalue = storage.ssGetValue('sskey');
+const ssvalue = sessionJStorage.getValue('sskey');
 console.log('storage', ssvalue);
 
 <!-- sessionStorage 删除key -->
-storage.ssRemove('sskey');
+sessionJStorage.remove('sskey');
+
+<!-- sessionStorage 清空 -->
+sessionJStorage.clearAll();
 
 <!-- 清空所有  localStorage、sessionStorage -->
-storage.clearAll();
+clearAll();
 
 ```
 
 ## 标注
 
-ls 前缀是 'localStorage' 缩写
+localJStorage 使用 window.localStorage
 
-ss 前缀是 'sessionStorage' 缩写
-
-如果存储的值是对象（包括 Object、Array。_.isObject() 判断为对象），其值将会被 JSON.stringify 并带上 'joey-prefix' 前缀进行存储。
-
-当取值时，对应值如果包含前缀 'joey-prefix' 也将被 JSON.prase
+sessionJStorage 使用 window.sessionStorage

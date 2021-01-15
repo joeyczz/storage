@@ -33,9 +33,6 @@ export default {
     file: "lib/index.min.js",
     name: "JStorage",
     format: "umd",
-    globals: {
-      lodash: "_",
-    },
     banner: `/* JStorage version ${pkg.version} */`,
   },
   plugins: [
@@ -51,5 +48,4 @@ export default {
     }),
     terser(),
   ],
-  external: ["lodash"],
 };

@@ -1,7 +1,7 @@
 /**
  * @jest-environment jsdom
  */
-import { removeAll, localJStorage, sessionJStorage } from "../src/index";
+import { clearAll, localJStorage, sessionJStorage } from "../src/index";
 
 const key = "key";
 
@@ -29,7 +29,7 @@ test("Storage removeAll", () => {
   const sVal = sessionJStorage.getValue(key);
   expect(sVal).toEqual(arrValue);
 
-  removeAll();
+  clearAll();
   const val1 = localJStorage.getValue(key);
   expect(val1).toBeNull();
   const val2 = sessionJStorage.getValue(key);

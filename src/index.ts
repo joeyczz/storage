@@ -4,9 +4,9 @@
 import { localJStorage } from "./localStorage";
 import { sessionJStorage } from "./sessionStorage";
 
-export const removeAll = () => {
-  localJStorage.clearAll();
-  sessionJStorage.clearAll();
+export const clearAll = () => {
+  localJStorage.clear();
+  sessionJStorage.clear();
 };
 
 export * from "./localStorage";

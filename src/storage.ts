@@ -47,7 +47,7 @@ export default class JStorage {
   /**
    * 清空 storage
    */
-  clearAll() {
+  clear() {
     this.storage.clear();
   }
 }
